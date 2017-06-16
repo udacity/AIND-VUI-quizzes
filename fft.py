@@ -83,7 +83,7 @@ def canned3():
 
 def show_three_sinusoids(freq1, freq2, freq3):
     def sinusoid(freq):
-        phase = 0.3
+        phase = np.random.random()
         return np.cos(2*np.pi * freq - phase)
     # Number of sample points per T=1
     N = 500
@@ -92,7 +92,9 @@ def show_three_sinusoids(freq1, freq2, freq3):
     # sample period
     T = R / N
 
-    t = np.arange(0.0, R, T) # returns an array of evenly spaced values
+
+    # t = np.arange(0.0, R, T) # returns an array of evenly spaced values
+    t = np.linspace(0.0, R, N)
 
     # plot three frequencies with random phase shifts
     plt.figure(1)
@@ -130,18 +132,16 @@ def show_three_sinusoids(freq1, freq2, freq3):
         wspace=0.2
         )
     plt.show()
-    return f4
+    return f4, T
 
-def splitem(freq_max, signal):
+def splitem(signal, spacing):
 
-    # Number of sample points per T=1
+    # Number of sample points
     N = np.shape(signal)[0]
-    # Frequency range to display
-    R = 5.0
-    # sample period
-    T = R / N
-    print('T={}'.format(T))
-    print('linspace end = {}'.format(1.0/(2.0*T)))
+
+    # sample spacing
+    T = spacing
+
 
     yf = scipy.fftpack.fft(signal)
     # start, stop, number of samples
@@ -157,10 +157,10 @@ if __name__ == '__main__':
 
     # pick three frequencies and add them
     f1 = 3
-    f2 = 9
-    f3 = 13
+    f2 = 12
+    f3 = 20
 
-    fsum= show_three_sinusoids(f1, f2, f3)
+    fsum, sample_period = show_three_sinusoids(f1, f2, f3)
 
     # now decompose
-    splitem(max(f1, f2, f3), fsum)
+    splitem(fsum, sample_period)
