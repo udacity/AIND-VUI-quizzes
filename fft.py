@@ -135,15 +135,15 @@ def show_three_sinusoids(freq1, freq2, freq3):
 def splitem(freq_max, signal):
 
     # Number of sample points per T=1
-    N = 500
+    N = np.shape(signal)[0]
     # Frequency range to display
     R = 5.0
     # sample period
     T = R / N
+    print('T={}'.format(T))
+    print('linspace end = {}'.format(1.0/(2.0*T)))
 
     yf = scipy.fftpack.fft(signal)
-    print(np.shape(signal))
-    print(np.shape(yf))
     # start, stop, number of samples
     xf = np.linspace(0.0, 1.0 / (2.0 * T), N / 2)
 
