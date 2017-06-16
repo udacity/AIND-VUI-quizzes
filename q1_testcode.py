@@ -9,9 +9,7 @@ num_samples, spacing, t = utils.get_wave_timing()
 
 if len(freqs) == 3 and max(freqs)<=50 and min(freqs)>=1:
     print('Frequencies look good!')
-    wave1 = utils.sinusoid(t * freqs[0])
-    wave2 = utils.sinusoid(t * freqs[1])
-    wave3 = utils.sinusoid(t * freqs[2])
+    wave1, wave2, wave3 = utils.make_waves(freqs)
     sum_waves = wave1 + wave2 + wave3
     plt.plot = utils.display_sinusoids(t, wave1, wave2, wave3, sum_waves)
     plt.show()

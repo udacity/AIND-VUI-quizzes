@@ -9,6 +9,24 @@ def sinusoid(freq):
     amplitude = 2 * (np.random.random_integers(1, 10))
     return amplitude * np.cos(2 * np.pi * freq - phase)
 
+def get_wave_timing():
+    # Number of sample points
+    num_samples = 500
+    # range max to display
+    range_of_time = 5.0
+    # sample spacing
+    spacing = range_of_time/num_samples
+    # array for time samples
+    t = np.linspace(0.0, range_of_time, num_samples)
+    return num_samples, spacing, t
+
+def make_waves(freqs):
+    _, _, t = get_wave_timing()
+    w0 = sinusoid(t*freqs[0])
+    w1 = sinusoid(t*freqs[1])
+    w2 = sinusoid(t*freqs[2])
+    return w0, w1, w2
+
 def display_sinusoids(time_array, f1, f2, f3, sum):
 
     # plot three frequencies with random phase shifts on y axis
