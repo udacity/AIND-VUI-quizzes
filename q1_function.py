@@ -3,15 +3,31 @@ import numpy as np
 import scipy.fftpack
 
 import q1_utils as utils
+import q1_dutils as dutils
 
 
 def choose_frequencies():
-    # pick three frequencies in a range between 0 and 50
-    # they will be given random amplitudes and phases
+    """
+    # provide three frequencies in a range between 1 and 50    
+    :return: [int, int, int]
+    """
+    freq1 = 1
+    freq2 = 3
+    freq3 = 9
+    return [freq1, freq2, freq3]
+
+
+def qchoose_frequencies():
+    """
+    # provide three frequencies in a range between 1 and 50    
+    :return: [int, int, int]
+    """
     # *** TODO provide three frequencies between 1 and 50
-    freq1 = 3
-    freq2 = 8
-    freq3 = 1
+    freq1 = None
+    freq2 = None
+    freq3 = None
+    # end TODO
+
     return [freq1, freq2, freq3]
 
 
@@ -22,20 +38,48 @@ def add_the_waves(freqs):
     return [w1, w2, w3, sum_waves]
 
 
-def demo_fft(sum_waves):
+def qadd_the_waves(freqs):
+    """
+    create three sinusoidal waves and one wave that is the sum of the three
+    :param freqs: [int, int, int]
+    :return: [np.array, np.array, np.array, np.array]
+        representing wave1, wave2, wave3, sum of waves
+        each array contains 500(by default) discrete values for plotting a sinusoidal
+    """
+    _, _, t = utils.get_wave_timing()
+    w1, w2, w3 = utils.make_waves(t, freqs)
+
+    # TODO sum the waves together to form sum_waves
+    sum_waves = None
+    # end TODO
+
+    return [w1, w2, w3, sum_waves]
+
+
+def qdemo_fft(sum_waves):
     num_samples, spacing, _ = utils.get_wave_timing()
 
+    # TODO create a Fast Fourier Transform of the waveform using scipy.fftpack.fft
+    yfft = None
+    # end TODO
+
+    xfft = np.linspace(0.0, 1.0/spacing, num_samples)
+    return xfft, yfft
+
+
+def demo_fft(sum_waves):
+    num_samples, spacing, t = utils.get_wave_timing()
+
     yf = scipy.fftpack.fft(sum_waves)
-    # only show half
-    xf = np.linspace(0.0, 1.0 / (2.0 * spacing), num_samples / 2)
+    xf = np.linspace(0.0, 1.0 / spacing, num_samples)
     return xf, yf
 
 
 if __name__ == '__main__':
     num_samples, spacing, t = utils.get_wave_timing()
     waves = add_the_waves(choose_frequencies())
-    plt.Figure = utils.display_sinusoids(t, *waves)
+    plt.Figure = dutils.display_sinusoids(t, *waves)
     plt.show()
     xf, yf = demo_fft(waves[-1])
-    plt.Figure = utils.display_fft(xf, yf)
+    plt.Figure = dutils.display_fft(xf, yf)
     plt.show()

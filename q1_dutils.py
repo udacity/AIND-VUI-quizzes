@@ -40,7 +40,9 @@ def display_sinusoids(time_array, f1, f2, f3, sum):
 def display_fft(xf, yf):
     num_samples = np.shape(yf)[0]
     fig, ax = plt.subplots()
-    ax.plot(xf, 2.0 / num_samples * np.abs(yf[:num_samples // 2]))
+    ax.plot(xf, 2.0/num_samples * np.abs(yf))
+    ax.set_xlim([0,50])
+    # ax.plot(xf, 2.0 / num_samples * np.abs(yf[:num_samples // 2]))
     plt.title('Fast Fourier Transform')
     plt.xlabel('frequency')
     plt.ylabel('amplitude')
