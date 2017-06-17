@@ -1,37 +1,49 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import scipy.fftpack
 
 
-# function to create sinusoid with random phase at given frequenc
+
 def sinusoid(freq):
+    """
+    return a sinusoidal of random amplitude and phase for a given frequency
+    :param freq: 
+    :return: 
+    """
     phase = np.random.random()
     amplitude = 2 * (np.random.random_integers(1, 10))
     return amplitude * np.cos(2 * np.pi * freq - phase)
 
-def get_wave_timing():
-    # Number of sample points
-    num_samples = 500
-    # range max to display
-    range_of_time = 5.0
+
+def get_wave_timing(num_samples=500, range_of_time = 5.0):
+    """
+    provide an array of time values of size num_samples spread evenly over range_of_time
+    :param num_samples: int 
+    :param range_of_time: float
+    :return: int, float, np.array
+    """
     # sample spacing
-    spacing = range_of_time/num_samples
+    spacing = range_of_time / num_samples
     # array for time samples
     t = np.linspace(0.0, range_of_time, num_samples)
     return num_samples, spacing, t
 
-def make_waves(freqs):
-    _, _, t = get_wave_timing()
-    w0 = sinusoid(t*freqs[0])
-    w1 = sinusoid(t*freqs[1])
-    w2 = sinusoid(t*freqs[2])
+
+def make_waves(t, freqs):
+    """
+    convert three frequencies into arrays of discrete values representing sinusoidal waves
+    :param freqs: [float, float, float]
+    :return: [np.array, np.array, np.array]
+    """
+    w0 = sinusoid(t * freqs[0])
+    w1 = sinusoid(t * freqs[1])
+    w2 = sinusoid(t * freqs[2])
     return w0, w1, w2
 
-def display_sinusoids(time_array, f1, f2, f3, sum):
 
+def display_sinusoids(time_array, f1, f2, f3, sum):
     # plot three frequencies with random phase shifts on y axis
     # plt.figure()
-    fig, ax = plt.subplots(4,1)
+    fig, ax = plt.subplots(4, 1)
     # plt.subplot(411)  # 3 rows, 1 column, fignum 1
     ax[0].plot(time_array, f1)
     ax[0].set_title('1st frequency component')
@@ -61,16 +73,14 @@ def display_sinusoids(time_array, f1, f2, f3, sum):
         wspace=0.2
     )
     # plt.show()
-    return plt.plot
+    return fig
+
 
 def display_fft(xf, yf):
-
     num_samples = np.shape(yf)[0]
-
-    plt.figure()
     fig, ax = plt.subplots()
     ax.plot(xf, 2.0 / num_samples * np.abs(yf[:num_samples // 2]))
     plt.title('Fast Fourier Transform')
     plt.xlabel('frequency')
     plt.ylabel('amplitude')
-    plt.show()
+    return fig
