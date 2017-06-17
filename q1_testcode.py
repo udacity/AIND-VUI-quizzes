@@ -106,6 +106,7 @@ import q1_function as function
 import q1_utils as utils
 import q1_dutils as dutils
 import matplotlib.pyplot as plt
+import scipy.fftpack
 # internal dev only end
 
 freqs = function.choose_frequencies()
@@ -126,10 +127,15 @@ if None not in freqs:
             print('Waves are summed correctly!')
             plt.Figure = dutils.display_sinusoids(t, *waves)
             plt.show()
-            # test third part
+            #test function demo_fft
             xf, yf = function.demo_fft(waves[-1])
-            plt.Figure = dutils.display_fft(xf, yf)
-            plt.show()
+            testyf = scipy.fftpack.fft(testsum)
+            if yf.all() == testyf.all():
+                print('FFT successful!')
+                plt.Figure = dutils.display_fft(xf, yf)
+                plt.show()
+            else:
+                print('Something is wrong with demo_fft.  The values are not as expected.')
         else:
             print('Something is wrong with the add_the_waves function')
     else:

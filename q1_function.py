@@ -60,19 +60,20 @@ def qdemo_fft(sum_waves):
     num_samples, spacing, _ = utils.get_wave_timing()
 
     # TODO create a Fast Fourier Transform of the waveform using scipy.fftpack.fft
-    yfft = None
+    # named 'y_fft'
+    y_fft = None
     # end TODO
 
-    xfft = np.linspace(0.0, 1.0/spacing, num_samples)
-    return xfft, yfft
+    x_fft = np.linspace(0.0, 1.0/spacing, num_samples)
+    return x_fft, y_fft
 
 
 def demo_fft(sum_waves):
     num_samples, spacing, t = utils.get_wave_timing()
 
-    yf = scipy.fftpack.fft(sum_waves)
-    xf = np.linspace(0.0, 1.0 / spacing, num_samples)
-    return xf, yf
+    y_fft = scipy.fftpack.fft(sum_waves)
+    x_fft = np.linspace(0.0, 1.0/spacing, num_samples)
+    return x_fft, y_fft
 
 
 if __name__ == '__main__':
