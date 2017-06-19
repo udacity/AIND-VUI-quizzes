@@ -12,6 +12,7 @@ def choose_frequencies():
     :return: [int, int, int]
     """
     freq1 = 1
+    # freq1 = None #test
     freq2 = 3
     freq3 = 9
     return [freq1, freq2, freq3]
@@ -35,8 +36,8 @@ def add_the_waves(freqs):
     _, _, t = utils.get_wave_timing()
     w1, w2, w3 = utils.make_waves(t, freqs)
     sum_waves = w1 + w2 + w3
+    # sum_waves = None #test
     return [w1, w2, w3, sum_waves]
-
 
 def qadd_the_waves(freqs):
     """
@@ -72,6 +73,7 @@ def demo_fft(sum_waves):
     num_samples, spacing, t = utils.get_wave_timing()
 
     y_fft = scipy.fftpack.fft(sum_waves)
+    # y_fft = None  # test
     x_fft = np.linspace(0.0, 1.0/spacing, num_samples)
     return x_fft, y_fft
 

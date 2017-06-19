@@ -99,6 +99,7 @@
 # # start of this quiz
 # import function
 # import utils
+# import dutils
 # runs when student click "test"
 # *****
 # internal dev only start
@@ -106,41 +107,44 @@ import q1_function as function
 import q1_utils as utils
 import q1_dutils as dutils
 import matplotlib.pyplot as plt
-import scipy.fftpack
+import numpy as np
 # internal dev only end
 
+import scipy.fftpack
 freqs = function.choose_frequencies()
 num_samples, spacing, t = utils.get_wave_timing()
 
 # test frequencies range
 if None not in freqs:
-    if len(freqs) == 3 and max(freqs)<=50 and min(freqs)>=1:
+    if None not in freqs \
+            or len(freqs) == 3 and max(freqs)<=50 and min(freqs)>=1:
         print('Frequencies look good!')
         waves = function.add_the_waves(freqs)
-        testwave1, testwave2, testwave3 = utils.make_waves(t, freqs)
-        testsum = testwave1 + testwave2 + testwave3
         # test function.add_the_waves
-        if len(waves) == 4 and waves[0].all() == testwave1.all() \
-                and waves[1].all() == testwave2.all() \
-                and waves[2].all() == testwave3.all() \
-                and waves[3].all() == testsum.all():
-            print('Waves are summed correctly!')
-            plt.Figure = dutils.display_sinusoids(t, *waves)
-            plt.show()
-            #test function demo_fft
-            xf, yf = function.demo_fft(waves[-1])
-            testyf = scipy.fftpack.fft(testsum)
-            if yf.all() == testyf.all():
-                print('FFT successful!')
-                plt.Figure = dutils.display_fft(xf, yf)
+        if waves[3] is not None:
+            testsum = waves[0] + waves[1] + waves[2]
+            if len(waves) == 4 and len(waves[3]) == num_samples and np.allclose(waves[3],testsum):
+                print('Waves are summed correctly!')
+                plt.Figure = dutils.display_sinusoids(t, *waves)
                 plt.show()
+                #test function demo_fft
+                xf, yf = function.demo_fft(waves[-1])
+                if yf is not None:
+                    testyf = scipy.fftpack.fft(waves[-1])
+                    if np.allclose(yf, testyf):
+                        print('FFT successful!')
+                        plt.Figure = dutils.display_fft(xf, yf)
+                        plt.show()
+                    else:
+                        print('demo_fft ERROR: The values are not as expected.')
+                else:
+                    print('demo_fft ERROR: Please replace the "None" value with the FFT of the wave.')
             else:
-                print('Something is wrong with demo_fft.  The values are not as expected.')
+                print('add_the_waves ERROR: The values were not as expected.  Add the waves with "+"')
         else:
-            print('Something is wrong with the add_the_waves function')
+            print('add_the_waves ERROR: Please replace the "None" value with a sum of the waves')
     else:
-        print('Something is wrong with the frequencies...')
-        print('Expected all three in a range between 1 and 50,')
-        print('but the result was {}'.format(freqs))
+        print('choose_frequencies ERROR: Expected three in a range between 1 and 50,')
+        print('but the result was {}.'.format(freqs))
 else:
-    print('Please replace the "None" values in choose_frequencies with values from 1 to 50')
+    print('choose_frequencies ERROR: Please replace the "None" values with values from 1 to 50.')
