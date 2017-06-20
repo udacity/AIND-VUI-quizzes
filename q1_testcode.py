@@ -111,40 +111,62 @@ import numpy as np
 # internal dev only end
 
 import scipy.fftpack
-freqs = function.choose_frequencies()
 num_samples, spacing, t = utils.get_wave_timing()
 
-# test frequencies range
-if None not in freqs:
-    if None not in freqs \
-            or len(freqs) == 3 and max(freqs)<=50 and min(freqs)>=1:
-        print('Frequencies look good!')
-        waves = function.add_the_waves(freqs)
-        # test function.add_the_waves
-        if waves[3] is not None:
-            testsum = waves[0] + waves[1] + waves[2]
-            if len(waves) == 4 and len(waves[3]) == num_samples and np.allclose(waves[3],testsum):
-                print('Waves are summed correctly!')
-                plt.Figure = dutils.display_sinusoids(t, *waves)
-                plt.show()
-                #test function demo_fft
-                xf, yf = function.demo_fft(waves[-1])
-                if yf is not None:
-                    testyf = scipy.fftpack.fft(waves[-1])
-                    if np.allclose(yf, testyf):
-                        print('FFT successful!')
-                        plt.Figure = dutils.display_fft(xf, yf)
-                        plt.show()
-                    else:
-                        print('demo_fft ERROR: The values are not as expected.')
-                else:
-                    print('demo_fft ERROR: Please replace the "None" value with the FFT of the wave.')
-            else:
-                print('add_the_waves ERROR: The values were not as expected.  Add the waves with "+"')
-        else:
-            print('add_the_waves ERROR: Please replace the "None" value with a sum of the waves')
-    else:
-        print('choose_frequencies ERROR: Expected three in a range between 1 and 50,')
-        print('but the result was {}.'.format(freqs))
-else:
-    print('choose_frequencies ERROR: Please replace the "None" values with values from 1 to 50.')
+# test choose_frequencies()
+freqs = function.choose_frequencies()
+assert None not in freqs, 'choose_frequencies ERROR: Please replace the "None" values with values from 1 to 50.'
+assert len(freqs)==3 and max(freqs)<=50 and min(freqs)>=1, 'choose_frequencies ERROR: Expected three in a range between 1 and 50, but the result was {}.'.format(freqs)
+print('Frequencies look good!')
+
+# test add_the_waves
+waves = function.add_the_waves(freqs)
+assert waves[3] is not None, 'add_the_waves ERROR: Please replace the "None" value with a sum of the waves'
+testsum = waves[0] + waves[1] + waves[2]
+assert len(waves) == 4 and len(waves[3]) == num_samples and np.allclose(waves[3],testsum), 'add_the_waves ERROR: The values were not as expected.  Add the waves with "+"'
+print('Waves are summed correctly!')
+plt.Figure = dutils.display_sinusoids(t, *waves)
+plt.show()
+
+# test demo_fft
+xf, yf = function.demo_fft(waves[-1])
+assert yf is not None, 'demo_fft ERROR: Please replace the "None" value with the FFT of the wave.'
+testyf = scipy.fftpack.fft(waves[-1])
+assert np.allclose(yf, testyf), 'demo_fft ERROR: The values are not as expected.'
+print('FFT successful!')
+plt.Figure = dutils.display_fft(xf, yf)
+plt.show()
+
+# if None not in freqs:
+#     if None not in freqs \
+#             or len(freqs) == 3 and max(freqs)<=50 and min(freqs)>=1:
+#         print('Frequencies look good!')
+#         waves = function.add_the_waves(freqs)
+#         # test function.add_the_waves
+#         if waves[3] is not None:
+#             testsum = waves[0] + waves[1] + waves[2]
+#             if len(waves) == 4 and len(waves[3]) == num_samples and np.allclose(waves[3],testsum):
+#                 print('Waves are summed correctly!')
+#                 plt.Figure = dutils.display_sinusoids(t, *waves)
+#                 plt.show()
+#                 #test function demo_fft
+#                 xf, yf = function.demo_fft(waves[-1])
+#                 if yf is not None:
+#                     testyf = scipy.fftpack.fft(waves[-1])
+#                     if np.allclose(yf, testyf):
+#                         print('FFT successful!')
+#                         plt.Figure = dutils.display_fft(xf, yf)
+#                         plt.show()
+#                     else:
+#                         print('demo_fft ERROR: The values are not as expected.')
+#                 else:
+#                     print('demo_fft ERROR: Please replace the "None" value with the FFT of the wave.')
+#             else:
+#                 print('add_the_waves ERROR: The values were not as expected.  Add the waves with "+"')
+#         else:
+#             print('add_the_waves ERROR: Please replace the "None" value with a sum of the waves')
+#     else:
+#         print('choose_frequencies ERROR: Expected three in a range between 1 and 50,')
+#         print('but the result was {}.'.format(freqs))
+# else:
+#     print('choose_frequencies ERROR: Please replace the "None" values with values from 1 to 50.')
