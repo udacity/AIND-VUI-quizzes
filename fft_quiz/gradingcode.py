@@ -18,6 +18,11 @@ Grading Code - The Python code responsible for marking submission correct/incorr
             grade_result['comment'] - This is the comment the student sees. You can use markdown in it. 
                 Pretty nifty.
 """
+# included in the quiz backend - do not add when pasting to quiz
+grade_result = None
+executor_result = None
+#####
+# start of paste to quiz
 import json
 
 # This is the stdout from Submit Code.

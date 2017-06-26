@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import utils
 import scipy.fftpack
 
-import q1_utils as utils
-import q1_dutils as dutils
+import dutils
 
 
 def choose_frequencies():
@@ -73,7 +73,7 @@ def demo_fft(sum_waves):
     num_samples, spacing, t = utils.get_wave_timing()
 
     y_fft = scipy.fftpack.fft(sum_waves)
-    y_fft = None  # test
+    # y_fft = None  # test
     x_fft = np.linspace(0.0, 1.0/spacing, num_samples)
     return x_fft, y_fft
 

@@ -1,6 +1,8 @@
 import numpy as np
 import scipy.fftpack
-import q1_utils as utils
+
+import utils
+
 
 def choose_frequencies():
     """

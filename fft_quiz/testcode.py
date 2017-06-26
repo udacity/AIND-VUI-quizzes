@@ -97,20 +97,16 @@
 # plt.show = show
 #
 # # start of this quiz
-# import function
-# import utils
-# import dutils
+import function
+import utils
+import dutils
 # runs when student click "test"
 # *****
-# internal dev only start
-import q1_function as function
-import q1_utils as utils
-import q1_dutils as dutils
 import matplotlib.pyplot as plt
 import numpy as np
-# internal dev only end
-
 import scipy.fftpack
+
+# internal dev only end
 num_samples, spacing, t = utils.get_wave_timing()
 
 # test choose_frequencies()

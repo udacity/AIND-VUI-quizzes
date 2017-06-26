@@ -1,10 +1,10 @@
-import q1_utils as utils
-import q1_function as function
-# import utils
-# import function
 import json
+
 import numpy as np
+import function
 import scipy.fftpack
+
+import utils
 
 result = {'is_correct': False,
           'error': False,
