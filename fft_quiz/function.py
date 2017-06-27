@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import utils
+import fft_quiz.utils as utils
 import scipy.fftpack
 
 import dutils

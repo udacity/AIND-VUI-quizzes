@@ -1,7 +1,7 @@
 import numpy as np
 import scipy.fftpack
 
-import utils
+import fft_quiz.utils as utils
 
 
 def choose_frequencies():

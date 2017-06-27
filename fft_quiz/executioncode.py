@@ -1,7 +1,7 @@
 import json
 
 import numpy as np
-import function
+import fft_quiz.function as function
 import scipy.fftpack
 
 import utils

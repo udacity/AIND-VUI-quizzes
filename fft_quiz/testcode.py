@@ -97,9 +97,9 @@
 # plt.show = show
 #
 # # start of this quiz
-import function
-import utils
-import dutils
+import fft_quiz.function as function
+import fft_quiz.utils as utils
+import fft_quiz.dutils as dutils
 # runs when student click "test"
 # *****
 import matplotlib.pyplot as plt
