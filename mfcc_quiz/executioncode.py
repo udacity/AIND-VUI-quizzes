@@ -13,7 +13,7 @@ result = {'is_correct': False,
 
 try:
     # test wav_to_mfcc()
-    mfcc_features = function.wav_to_mfcc('sample02.wav')
+    mfcc_features = function.wav_to_mfcc('sample02.wav', 13)
     assert mfcc_features is not None, 'mfcc_features ERROR: returned None'
     (rate, sig) = wav.read('sample02.wav')
     correct_mf = mfcc(sig, rate, numcep=13)

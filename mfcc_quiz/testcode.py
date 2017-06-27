@@ -99,12 +99,10 @@
 # start of this quiz code
 import mfcc_quiz.function as function
 import mfcc_quiz.dutils as dutils
-import numpy as np
-from python_speech_features import mfcc
 import scipy.io.wavfile as wav
 
 test_rate, test_sig = wav.read('sample01.wav')
-print("Here's the audio file signal:")
+print("Audio file and MFCC extraction:")
 dutils.plot_raw_audio(test_sig)
-mfcc_sig = function.get_mfcc('sample01.wav')
+mfcc_sig = function.wav_to_mfcc('sample01.wav', 13)
 dutils.plot_mfcc_feature(mfcc_sig)
