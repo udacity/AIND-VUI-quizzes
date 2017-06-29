@@ -8,3 +8,5 @@ to convert the signal to MFCC.  Here are the resources you need to write your fu
 * [python_speech_features.mfcc](http://python-speech-features.readthedocs.io/en/latest/) (to convert to MFCC)
 
 When you succeed in returning the correct file, you will "see" the MFCC spectrum in the output similar to the following:
+![raw](../images/raw_audio.png)
+![mfcc](../images/normalized_mfcc.png)
