@@ -97,12 +97,10 @@
 # plt.show = show
 #
 # start of this quiz code
-import ngram_quiz.function as function
-import ngram_quiz.dutils as dutils
-import ngram_quiz.utils as utils
+import ngram_quiz_1.function as function
 
-# test_rate, test_sig = wav.read('sample01.wav')
-# print("Audio file and MFCC extraction:")
-# dutils.plot_raw_audio(test_sig)
-# mfcc_sig = function.wav_to_mfcc('sample01.wav', 13)
-# dutils.plot_mfcc_feature(mfcc_sig)
+for sentence in function.test_sentences:
+    print('\n*** Sentence: "{}"'.format(sentence))
+    t, b = function.sentence_to_bigrams(sentence)
+    print('tokens = {}'.format(t))
+    print('bigrams = {}'.format(b))

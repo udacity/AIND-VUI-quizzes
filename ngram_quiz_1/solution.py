@@ -1,5 +1,3 @@
-from collections import Counter
-
 import nltk
 from nltk import ngrams
 
