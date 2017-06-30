@@ -1,20 +1,34 @@
-test_sentences = [
-    'the old man spoke to me',
-    'me to spoke man old the',
-    'old man me old man me',
-]
+from collections import Counter
+import ngram_quiz_2.utils as utils
 
-def sentence_to_bigrams(sentence):
+
+def sample_run():
+    # sample usage by test code (this definition not actually run for the quiz)
+    tokens, bigrams = utils.bigrams_from_transcript('transcripts.txt')
+    bg_dict = bigram_mle(tokens, bigrams)
+    print(bg_dict)
+
+
+def bigram_mle(tokens, bigrams):
     """
-    Add start '<s>' and stop <'/s> tags to the sentence and tokenize it into a list
-    of words (sentence_tokens) and bigrams (sentence_bigrams)
-    :param sentence: string
-    :return: list, list
-        sentence_tokens: ordered list of words found in the sentence
-        sentence_bigrams: a list of ordered two-word tuples found in the sentence
+    provide a dictionary of probabilities for all bigrams in a corpus of text
+    the calculation is based on maximum likelihood estimation and does not include
+    any smoothing.  A tag '<unk>' has been added for unknown probabilities.
+    :param tokens: list
+        tokens: list of all tokens in the corpus
+    :param bigrams: list
+        bigrams: list of all two word tuples in the corpus
+    :return: dict
+        bg_mle_dict: a dictionary of bigrams:
+            key: tuple of two bigram words, in order OR <unk> key
+            value: float probability
+
     """
+    bg_mle_dict = {}
+    bg_mle_dict['<unk>'] = 0.
     #TODO implement
-    sentence_tokens = None
-    sentence_bigrams = None
-    return sentence_tokens, sentence_bigrams
+    return bg_mle_dict
 
+
+if __name__ == '__main__':
+    sample_run()

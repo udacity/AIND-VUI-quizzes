@@ -97,10 +97,10 @@
 # plt.show = show
 #
 # start of this quiz code
-import ngram_quiz_1.function as function
+import ngram_quiz_2.function as function
+import ngram_quiz_2.utils as utils
 
-for sentence in function.test_sentences:
-    print('\n*** Sentence: "{}"'.format(sentence))
-    t, b = function.sentence_to_bigrams(sentence)
-    print('tokens = {}'.format(t))
-    print('bigrams = {}'.format(b))
+tokens, bigrams = utils.bigrams_from_transcript('transcripts.txt')
+bg_dict = function.bigram_mle(tokens, bigrams)
+print("Probability bigram dictionary:")
+print(bg_dict)
