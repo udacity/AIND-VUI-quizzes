@@ -4,7 +4,7 @@ import numpy as np
 import fft_quiz.function as function
 import scipy.fftpack
 
-import utils
+import fft_quiz.utils as utils
 
 result = {'is_correct': False,
           'error': False,
