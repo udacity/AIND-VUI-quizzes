@@ -1,27 +1,27 @@
-# import json
-#
-# import ngram_quiz.function as function
-#
-# import numpy as np
-# from python_speech_features import mfcc
-# import scipy.io.wavfile as wav
-#
-# result = {'is_correct': False,
-#           'error': False,
-#           'values': [],
-#           'output': ''}
-#
-# try:
-#     # test wav_to_mfcc()
-#     mfcc_features = function.wav_to_mfcc('sample02.wav', 13)
-#     assert mfcc_features is not None, 'mfcc_features ERROR: returned None'
-#     (rate, sig) = wav.read('sample02.wav')
-#     correct_mf = mfcc(sig, rate, numcep=13)
-#     assert np.allclose(mfcc_features, correct_mf), 'unexpected values for mfcc features'
-#     result['is_correct'] = True
-#
-# except Exception as err:
-#     result['feedback'] = 'Oops, looks like you got an error!'
-#     result['error'] = str(err)
-#
-# print(json.dumps(result))
+import json
+import numpy as np
+import ngram_quiz_1.function as function
+
+
+result = {'is_correct': False,
+          'error': False,
+          'values': [],
+          'output': ''}
+
+try:
+    # test sentence_to_bigrams() function
+    sentence = 'the old man spoke to me'
+    t, b = function.sentence_to_bigrams(sentence)
+    sentence_tokens = ['<s>'] + sentence.split() + ['</s>']
+    sentence_bigrams = []
+    for i in range(len(sentence_tokens) - 1):
+        sentence_bigrams.append((sentence_tokens[i], sentence_tokens[i + 1]))
+    assert np.equal(t, sentence_tokens)
+    assert np.equal(b, sentence_bigrams)
+    result['is_correct'] = True
+
+except Exception as err:
+    result['feedback'] = 'Oops, looks like you got an error!'
+    result['error'] = str(err)
+
+print(json.dumps(result))

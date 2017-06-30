@@ -1,6 +1,3 @@
-import nltk
-from nltk import ngrams
-
 test_sentences = [
     'the old man spoke to me',
     'me to spoke man old the',
@@ -16,8 +13,10 @@ def sentence_to_bigrams(sentence):
         sentence_tokens: ordered list of words found in the sentence
         sentence_bigrams: a list of ordered two-word tuples found in the sentence
     """
-    sentence_tokens = ['<s>'] + nltk.word_tokenize(sentence.lower()) + ['</s>']
-    sentence_bigrams = list(ngrams(sentence_tokens, 2))
+    sentence_tokens = ['<s>'] + sentence.split() + ['</s>']
+    sentence_bigrams = []
+    for i in range(len(sentence_tokens)-1):
+        sentence_bigrams.append((sentence_tokens[i], sentence_tokens[i+1]))
     return sentence_tokens, sentence_bigrams
 
 

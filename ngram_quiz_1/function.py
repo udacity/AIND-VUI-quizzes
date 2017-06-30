@@ -1,6 +1,3 @@
-from nltk import word_tokenize
-from nltk.util import ngrams
-
 test_sentences = [
     'the old man spoke to me',
     'me to spoke man old the',
