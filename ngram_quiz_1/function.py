@@ -6,8 +6,8 @@ test_sentences = [
 
 def sentence_to_bigrams(sentence):
     """
-    Add start '<s>' and stop <'/s> tags to the sentence and tokenize it into a list
-    of words (sentence_tokens) and bigrams (sentence_bigrams)
+    Add start '<s>' and stop '</s>' tags to the sentence and tokenize it into a list
+    of lower-case words (sentence_tokens) and bigrams (sentence_bigrams)
     :param sentence: string
     :return: list, list
         sentence_tokens: ordered list of words found in the sentence

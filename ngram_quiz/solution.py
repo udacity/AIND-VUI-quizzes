@@ -1,7 +1,6 @@
 from collections import Counter
 
 import numpy as np
-from nltk.util import ngrams
 
 import ngram_quiz.utils as utils
 
@@ -16,7 +15,8 @@ def main():
     tokens, bigrams = utils.bigrams_from_transcript('transcripts.txt')
     bigram_raw_counts = Counter(bigrams)
     tokens_raw_counts = Counter(tokens)
-
+    print(bigram_raw_counts)
+    print(tokens_raw_counts)
     bg_mle_dict_ll = bigram_mle_loglikelihood(bigram_raw_counts, tokens_raw_counts)
     bg_addone_dict_ll = add_one_smoothing_log_likelihood(bigram_raw_counts, tokens_raw_counts)
 
@@ -29,9 +29,11 @@ def main():
         print('log of Laplace Add-one smoothed estimate: {}'.format((sentence_loglikelihood(sentence, bg_addone_dict_ll))))
 
 def sentence_loglikelihood(sentence, loglikelihood_dict):
-    s_tokens = ['<s>'] + sentence.split() + ['</s>']
+    s_tokens, s_bigrams = utils.sentence_to_bigrams(sentence)
+    # s_tokens = ['<s>'] + sentence.split() + ['</s>']
     ll = 0.
-    for bg in ngrams(s_tokens, 2):
+    # for bg in ngrams(s_tokens, 2):
+    for bg in s_bigrams:
         if bg in loglikelihood_dict:
             ll = ll + loglikelihood_dict[bg]
         else:

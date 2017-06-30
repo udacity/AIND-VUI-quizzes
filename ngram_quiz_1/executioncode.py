@@ -12,12 +12,12 @@ try:
     # test sentence_to_bigrams() function
     sentence = 'the old man spoke to me'
     t, b = function.sentence_to_bigrams(sentence)
-    sentence_tokens = ['<s>'] + sentence.split() + ['</s>']
+    sentence_tokens = ['<s>'] + sentence.lower().split() + ['</s>']
     sentence_bigrams = []
     for i in range(len(sentence_tokens) - 1):
         sentence_bigrams.append((sentence_tokens[i], sentence_tokens[i + 1]))
-    assert np.equal(t, sentence_tokens)
-    assert np.equal(b, sentence_bigrams)
+    assert t == sentence_tokens
+    assert b == sentence_bigrams
     result['is_correct'] = True
 
 except Exception as err:
