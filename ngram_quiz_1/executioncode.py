@@ -1,5 +1,4 @@
 import json
-import numpy as np
 import ngram_quiz_1.function as function
 
 

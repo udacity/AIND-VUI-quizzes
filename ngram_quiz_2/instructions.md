@@ -1,35 +1,38 @@
-## Generating N-Grams
+## Probabilities and Likelihoods with Bigrams
 
-An N-Gram is an ordered sequence of words. For example:
-![ngram example](../images/ngrams_numbers.png)
-In the following series of quizes, you will work with 2-grams, or [bigrams](https://en.wikipedia.org/wiki/Bigram), as they are more commonly called.
-The objective is to create a function that calculates the probability that a particular sentence
-could occur in a corpus of text, based on the probabilities of its component bigrams.  We'll do this in stages though:
-* Quiz 1 - Extract tokens and bigrams from a sentence
-* Quiz 2 - Calculate probabilities and log likelihoods for bigrams
-* Quiz 3 - Calculate the log likelihood of a given sentence based on a corpus of text using bigrams
+Recall from a previous video that the probability of a series of words
+can be calculated from the chained probabilities of its history:
 
-#### Assumptions and terminology
-We will assume that text data is in the form of sentences with no punctuation.  If a sentence is in a single line, we will add add a token for
-start of sentence: `<s>` and end of sentence: `</s>`.  For example, if the sentence is "I love language models." it will appear in code as:
+`the equation`
 
-```
-'I love language models'
-```
+Our concrete example:
 
-The **tokens** for this sentence are represented as an ordered list of the lower case words plus the start and end sentence tags:
+`the example P("I love language models ...) use mathquill here`
 
-```
-tokens = ['<s>', 'i', 'love', 'language', 'models', '</s>']
-```
+The probabilities of sequence occurrences in a large textual corpus can be calculated this
+way and used as a language model to add grammar and contectual knowledge to a speech
+recognition system.  However, there are a few problems with this approach in practice:
+1. There is a prohibitively large number of calculations for all the 
+possible sequences of varying length in a large textual corpus.  
+2. Even if we're able to calculate, store, and search all combinations from a textual corpus to "train"
+the probabilities, some possible combinations will not exist that might be queried later
+because language is creative.
+3. Repeated multiplications of small probabilitie can cause underflow problems in computers when
+the values become to small.
 
-The **bigrams** for this sentence are represented as a list of lower case ordered pairs of tokens:
+To address the first problem, we use the [Markov Assumption]() which allows us to approximate
+a sequence probability with a shorter sequence.  We should expect longer sequences to provide better
+approximations, but in the bigram case, the equation reduces to:
 
-```
-bigrams = [('<s>', 'i'), ('i', 'love'), ('love', 'language'), ('language', 'models'), ('models', '</s>')]
-```
+`the reduced equation`
 
-## Quiz 1 Instructions
+Concrete example:
+
+`example`
+
+
+
+## Quiz 2 Instructions
 
 In the quiz below, write a function that returns a list of tokens and a list of bigrams for a given sentence.  You will need to first break a sentence into words in a list, then add a `<s>` and `<s/>` token to the
 start and end of the list to represent the start and end of the sentence.
